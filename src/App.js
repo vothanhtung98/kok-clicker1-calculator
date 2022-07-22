@@ -38,68 +38,88 @@ function App() {
         <div className='calculator-container'>
           <h3>King Of Kinks Clicker 1 Strategy Calculator</h3>
           <h5>Time Left</h5>
-          <div>
-            <span> Day(s): </span>
-            <input
-              type='text'
-              placeholder='0-13'
-              name='d'
-              required
-              value={d}
-              onChange={onStrategyFormChange}
-            />
-            <span> Hour(s): </span>
-            <input
-              type='text'
-              placeholder='0-24'
-              name='h'
-              required
-              value={h}
-              onChange={onStrategyFormChange}
-            />
-            <span> Min(s): </span>
-            <input
-              type='text'
-              placeholder='0-60'
-              name='m'
-              required
-              value={m}
-              onChange={onStrategyFormChange}
-            />
+          <div className='input-container'>
+            <div className='input-item'>
+              <span> Day(s): </span>
+              <input
+                type='text'
+                placeholder='Day (0-13)'
+                name='d'
+                required
+                value={d}
+                onChange={onStrategyFormChange}
+              />
+            </div>
+
+            <div className='input-item'>
+              <span> Hour(s): </span>
+              <input
+                type='text'
+                placeholder='Hour (0-24)'
+                name='h'
+                required
+                value={h}
+                onChange={onStrategyFormChange}
+              />
+            </div>
+
+            <div className='input-item'>
+              <span> Min(s): </span>
+              <input
+                type='text'
+                placeholder='Minute (0-60)'
+                name='m'
+                required
+                value={m}
+                onChange={onStrategyFormChange}
+              />
+            </div>
           </div>
 
           <h5>Your Current Progress</h5>
-          <span> XP: </span>
-          <input
-            type='text'
-            placeholder='0-814000'
-            name='xp'
-            required
-            value={xp}
-            onChange={onStrategyFormChange}
-          />
-          <span> Intimacy Lvl: </span>
-          <input
-            type='text'
-            placeholder='1-5'
-            name='intimacy'
-            required
-            value={intimacy}
-            onChange={onStrategyFormChange}
-          />
-          <span> Aphrosidiacs: </span>
-          <input
-            type='text'
-            placeholder='0-5800'
-            name='aphros'
-            required
-            value={aphros}
-            onChange={onStrategyFormChange}
-          />
+          <div className='input-container'>
+            <div className='input-item'>
+              <span> XP: </span>
+              <input
+                type='text'
+                placeholder='XP (0-814000)'
+                name='xp'
+                required
+                value={xp}
+                onChange={onStrategyFormChange}
+              />
+            </div>
+
+            <div className='input-item'>
+              <span> Intimacy: </span>
+              <input
+                type='text'
+                placeholder='Intimacy (1-5)'
+                name='intimacy'
+                required
+                value={intimacy}
+                onChange={onStrategyFormChange}
+              />
+            </div>
+
+            <div className='input-item'>
+              <span> Aphrosidiacs: </span>
+              <input
+                type='text'
+                placeholder='Aprhos (0-5800)'
+                name='aphros'
+                required
+                value={aphros}
+                onChange={onStrategyFormChange}
+              />
+            </div>
+          </div>
+
           <div>
             <button onClick={makeStrategy}>Find Strategy</button>
           </div>
         </div>
+
         {makeTextFrom &&
           <div>
             {bestPurchaseStrat &&

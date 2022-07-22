@@ -47,6 +47,7 @@
 
 input {
   border-radius: 4px;
+  padding: 4px;
 }
 
 button {
@@ -67,5 +68,46 @@ h5 {
 }
 
 .calculator-container{
-  padding-top: 16px;
+  padding: 16px 16px 0;
+}
+
+p:last-child{
+  margin-bottom: 0;
+  padding-bottom: 16px;
+}
+
+.input-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.input-item {
+  margin: 0 8px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+span {
+  margin-right: 8px;
+  min-width: 150px;
+  text-align:right;
+}
+
+@media screen and (max-width: 1410px) {
+  .input-container{
+    flex-direction: column;
+  }
+
+  input{
+    margin: 4px 0;
+    min-width: 40%;
+    max-width: 100%;
+  }
+
+  span {
+    display: none;
+  }
 }

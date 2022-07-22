@@ -1,5 +1,13 @@
 .App {
   text-align: center;
+  min-height: 100vh;
+	background: url(https://static.miraheze.org/kingofkinkswiki/9/9a/Site-background-dark.png) no-repeat top center/cover;
+  color:white;
+}
+
+.dark-overlay {
+	background-color: rgba(0, 0, 0, 0.7);
+	min-height: 100vh;
 }
 
 .App-logo {
@@ -35,4 +43,29 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+input {
+  border-radius: 4px;
+}
+
+button {
+  background-color: #287e5b;
+  color: white;
+  border-radius: 4px;
+  padding: 4px 12px;
+  margin: 16px 0 12px;
+  border:none;
+}
+
+h3{
+  color:#ca1f3b;
+}
+
+h5 {
+  padding: 8px 0 4px;
+}
+
+.calculator-container{
+  padding-top: 16px;
 }

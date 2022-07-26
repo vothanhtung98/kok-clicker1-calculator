@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
-import Script from './script/script'
+import completedStrat from './script/completedStrat'
+import { changeTimeFormatFromMinute, findTimestamp } from './script/utilities'
 
 function App() {
   const [strategyForm, setStrategyForm] = useState({
@@ -9,10 +10,12 @@ function App() {
     aphros: '',
     d: '',
     h: '',
-    m: ''
+    m: '',
+    stamina: '',
+    staminaPurchaseCount: ''
   })
 
-  const { xp, intimacy, aphros, d, h, m } = strategyForm
+  const { xp, intimacy, aphros, d, h, m, stamina, staminaPurchaseCount } = strategyForm
 
   const [strategy, setStrategy] = useState({})
 
@@ -27,7 +30,16 @@ function App() {
 
   const makeStrategy = e => {
     e.preventDefault()
-    setStrategy(Script.completedStrat(parseInt(xp), parseInt(intimacy), parseInt(aphros), parseInt(d), parseInt(h), parseInt(m)))
+    setStrategy(completedStrat({
+      xp: parseInt(xp),
+      currentIntimacy: parseInt(intimacy),
+      currentAphros: parseInt(aphros),
+      dLeft: parseInt(d),
+      hLeft: parseInt(h),
+      mLeft: parseInt(m),
+      currentStamina: parseInt(stamina),
+      staminaPurchaseCount: parseInt(staminaPurchaseCount)
+    }))
   }
 
   const makeTextFrom = bestPurchaseStrat ? strategyAfterPurchase : originalStrategy
@@ -113,6 +125,30 @@ function App() {
                 onChange={onStrategyFormChange}
               />
             </div>
+
+            <div className='input-item'>
+              <span> Stamina: </span>
+              <input
+                type='text'
+                placeholder='Stamina (0-240)'
+                name='stamina'
+                required
+                value={stamina}
+                onChange={onStrategyFormChange}
+              />
+            </div>
+
+            <div className='input-item'>
+              <span> Stamina Purchases: </span>
+              <input
+                type='text'
+                placeholder='Stamina Purchases (0-999)'
+                name='staminaPurchaseCount'
+                required
+                value={staminaPurchaseCount}
+                onChange={onStrategyFormChange}
+              />
+            </div>
           </div>
 
           <div>
@@ -128,20 +164,20 @@ function App() {
                   <p>Step 0: Buy {bestPurchaseStrat.aphrosPurchaseTimes * 200} Aphrosidiacs.</p>
                 }
                 {makeTextFrom.map((intimacyLvl, index) => {
-                  return <p key={index}>Step {index + 1}: Stop using stamina after {Script.changeTimeFormatFromMinute(intimacyLvl.timeToStop)}, save stamina for {Script.changeTimeFormatFromMinute(intimacyLvl.timeSave)} then upgrade to Intimacy lvl {intimacyLvl.upgradeToIntimacyLvl} and use all stamina.</p>
+                  return <p key={index}>Step {index + 1}: Stop using stamina at {findTimestamp({ mins: intimacyLvl.timeToStopFromStart })}, save stamina till {findTimestamp({ mins: intimacyLvl.timeToUpgradeFromStart })} then upgrade to Intimacy lvl {intimacyLvl.upgradeToIntimacyLvl} and use all stamina.</p>
                 })}
-                {bestPurchaseStrat.staminaPurchaeTimes &&
-                  <p>Step {makeTextFrom.length + 1}: Buy Stamina {bestPurchaseStrat.staminaPurchaeTimes} times.</p>
+                {bestPurchaseStrat.staminaPurchaseTimes &&
+                  <p>Step {makeTextFrom.length + 1}: Buy Stamina {bestPurchaseStrat.staminaPurchaseTimes} times.</p>
                 }
-                <p>You have {Script.changeTimeFormatFromMinute(bestPurchaseStrat.freeTime)} of leeway. Total gems required: {bestPurchaseStrat.totalCost}.</p>
+                <p>You have {changeTimeFormatFromMinute({ mins: bestPurchaseStrat.freeTime })} of leeway. Total gems required: {bestPurchaseStrat.totalCost}.</p>
               </>
             }
             {!bestPurchaseStrat &&
               <>
                 {makeTextFrom.map((intimacyLvl, index) => {
-                  return <p key={index}>Step {index + 1}: Stop using stamina after {Script.changeTimeFormatFromMinute(intimacyLvl.timeToStop)}, save stamina for {Script.changeTimeFormatFromMinute(intimacyLvl.timeSave)} then upgrade to Intimacy lvl {intimacyLvl.upgradeToIntimacyLvl} and use all stamina.</p>
+                  return <p key={index}>Step {index + 1}: Stop using stamina at {findTimestamp({ mins: intimacyLvl.timeToStopFromStart })}, save stamina till {findTimestamp({ mins: intimacyLvl.timeToUpgradeFromStart })} then upgrade to Intimacy lvl {intimacyLvl.upgradeToIntimacyLvl} and use all stamina.</p>
                 })}
-                <p>You have {Script.changeTimeFormatFromMinute(freeTime)} of leeway. Total gems required: 0. </p>
+                <p>You have {changeTimeFormatFromMinute({ mins: freeTime })} of leeway. Total gems required: 0. </p>
               </>
             }
           </div>

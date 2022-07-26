@@ -59,6 +59,10 @@ button {
   border:none;
 }
 
+button:hover {
+  background-color: #2cac79;
+}
+
 h3{
   color:#ca1f3b;
 }
@@ -78,6 +82,7 @@ p:last-child{
 
 .input-container{
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -92,15 +97,11 @@ p:last-child{
 
 span {
   margin-right: 8px;
-  min-width: 150px;
-  text-align:right;
+  min-width: 200px;
+  text-align: left;
 }
 
 @media screen and (max-width: 1410px) {
-  .input-container{
-    flex-direction: column;
-  }
-
   input{
     margin: 4px 0;
     min-width: 40%;

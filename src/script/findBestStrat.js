@@ -32,7 +32,7 @@ const findBestStrat = ({ stratsAvailable }) => {
     // find best mix strat
     mixStrat.sort((a, b) => a.totalCost - b.totalCost)
     let mixStratFiltered = mixStrat.filter(strat => strat.totalCost === mixStrat[0].totalCost)
-    if (mixStratFiltered.length > 1) mixStratFiltered.sort((a, b) => a.eff - b.eff)
+    if (mixStratFiltered.length > 1) mixStratFiltered.sort((a, b) => b.eff - a.eff)
     mixStratFiltered[0].freeTime = mixStratFiltered[0].timeGain - stratsAvailable.timeNeeded
     return mixStratFiltered[0]
 }
